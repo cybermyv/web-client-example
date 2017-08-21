@@ -1,0 +1,42 @@
+{
+    "name": "web-client-app",
+    "version": "1.0.0",
+    "description": "Клиентская часть калькулятора самозамеса",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cybermyv/web-client-example.git"
+    },
+    "author": "Mironov Y",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-cli": "^6.24.1",
+        "babel-loader": "^7.1.1",
+        "babel-preset-es2015": "^6.24.1",
+        "babel-preset-stage-0": "^6.24.1",
+        "babel-preset-stage-1": "^6.24.1",
+        "babel-preset-stage-2": "^6.24.1",
+        "babel-preset-stage-3": "^6.24.1",
+        "css-loader": "^0.28.4",
+        "file-loader": "^0.11.2",
+        "html-loader": "^0.5.1",
+        "style-loader": "^0.18.2",
+        "url-loader": "^0.5.9",
+        "webpack": "^3.5.4"
+    },
+    "dependencies": {
+        "angular": "^1.6.5",
+        "angular-animate": "^1.6.5",
+        "angular-aria": "^1.6.5",
+        "angular-material": "^1.1.4",
+        "angular-resource": "^1.6.5",
+        "angular-ui-router": "^1.0.3"
+    },
+    "bugs": {
+        "url": "https://github.com/cybermyv/web-client-example/issues"
+    },
+    "homepage": "https://github.com/cybermyv/web-client-example#readme"
+}
