@@ -36,8 +36,6 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                 console.log(aromas);
 
                 //   debugger;
-
-
             }
         })
 

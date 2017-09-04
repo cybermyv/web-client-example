@@ -9,17 +9,11 @@
 </md-sidenaw> -->
 <div ng-controller="aromaListCtrl">
 
-    <md-button class="md-icon-button" ng-click="toggleLSNav()">OK</md-button>
-
+    <!-- <md-button class="md-icon-button" ng-click="toggleLSNav()">OK</md-button>
     <md-sidenav md-is-open="showLSNav" flex="20" class="md-sidenav-left">
-
-        <!-- <md-sidenav md-is-open="showLSNav" class="md-sidenav-left"> -->
-
         <md-toolbar layout-padding class="md-medium-tall">
             <h2 class="md-toolbar-tools">Действия - аромки</h2>
-
         </md-toolbar>
-
         <md-content>
             <p>dddddddddddddd</p>
             <p>dddddddddddddd</p>
@@ -27,6 +21,53 @@
             <p>dddddddddddddd</p>
             <p>dddddddddddddd</p>
         </md-content>
+    </md-sidenav> -->
 
-    </md-sidenav>
+    <div layout="row">
+        <!-- див для отображения меню CRUD -->
+        <md-menu md-offset="0 4">
+            <md-button ng-click="$mdMenu.open()">Действия</md-button>
+            <md-menu-content>
+                <md-menu-item>
+                    <!-- <md-button ng-click="addNewAroma()">Добавить
+                    </md-button> -->
+                    <button class="md-button" type="button" ng-click="addNewAroma()">Добавить</button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="addNewAroma()">Редактировать
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="addNewAroma()">Удалить
+                    </md-button>
+                </md-menu-item>
+                <md-divider></md-divider>
+                <md-menu-item>
+                    <md-button ng-click="addNewAroma()">Обновить
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+    <div>
+        <!-- Див для отображения грида -->
+        <md-grid-list md-cols="4" md-row-height="4:1" md-gutter="8px">
+            <md-grid-tile class="gray" md-colspan="4">
+                <div layout="column" layout-fill>this is a static row</div>
+            </md-grid-tile>
+
+            <md-grid-tile class="gray" ng-repeat="item in aromaListCtrl.aromas" md-colspan="4">
+                <div layout="row" flex>
+                    <div flex>this row</div>
+                    <div flex>should repeat</div>
+                    <div flex>for every</div>
+                    <div flex>item</div>
+                </div>
+            </md-grid-tile>
+        </md-grid-list>
+    </div>
+
+
+</div>
+
 </div>
