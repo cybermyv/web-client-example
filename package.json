@@ -33,6 +33,7 @@
         "angular-aria": "^1.6.5",
         "angular-material": "^1.1.4",
         "angular-resource": "^1.6.5",
+        "angular-ui-grid": "^4.0.6",
         "angular-ui-router": "^1.0.3"
     },
     "bugs": {

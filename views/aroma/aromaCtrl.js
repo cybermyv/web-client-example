@@ -1,11 +1,18 @@
 import 'angular-resource';
 import 'angular-ui-router';
+import 'angular-ui-grid';
+import './../../node_modules/angular-ui-grid/ui-grid.css';
+
 import './../../services/services';
 
 let aromaModule = angular.module('views.aroma', [
     'services',
     'ngResource',
-    'ui.router'
+    'ui.router',
+    'ui.grid',
+    'ui.grid.edit',
+    'ui.grid.selection',
+    'ui.grid.resizeColumns'
 ]);
 //  .service('Aromaservice', AromaService);
 
@@ -34,8 +41,30 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
             },
             controller: function($scope, $state, AromaService, aromas) {
                 console.log(aromas);
+                $scope.dataGrid = aromas;
 
-                //   debugger;
+                $scope.gridOptions = {
+                    data: $scope.dataGrid,
+                    //columnDefs
+                    enableRowSelection: true,
+                    enableRowHeaderSelection: false,
+                    multiSelect: false,
+                    enableRowHashing: false
+                }; // $scope.gridOptions
+
+                $scope.gridOptions.onRegisterApi = function(gridApi) {
+                    $scope.gridApi = gridApi;
+
+                    $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+
+                    gridApi.selection.on.rowSelectionChanged($scope, row => {
+
+                        $scope.mySelectedRows = row;
+                        //    console.log($scope.mySelectedRows);
+                        // debugger;
+                    });
+                };
+
             }
         })
 
