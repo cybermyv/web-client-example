@@ -30,8 +30,8 @@ aromaModule.controller("aromaListCtrl", $scope => {
 
 aromaModule.config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
-        .state('list', {
-            url: '/list',
+        .state('aroma', {
+            url: '/aroma',
             templateUrl: 'views/aroma/aroma.list.html',
             resolve: {
                 aromas: (AromaService) => {
@@ -67,10 +67,16 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
 
             }
         })
+        .state('aroma.add',{
+            url : '/add',
+            controller : function ($scope, $state, Aromaservice){
+                console.log('добавляем аромку');
+            }
+        })
 
     //--
     //--
-    $urlRouterProvider.otherwise('/list');
+    $urlRouterProvider.otherwise('/aroma');
 });
 
 

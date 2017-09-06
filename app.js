@@ -10,6 +10,3 @@ import './views/aroma/aromaCtrl';
 
 let app = angular.module('app', ['views.aroma', "ngMaterial"]);
 
-// app.config(($stateProvider, $urlRouterProvider) => {
-//     $urlRouterProvider.otherwise('/list');
-// });
