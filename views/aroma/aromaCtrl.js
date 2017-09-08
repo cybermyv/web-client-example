@@ -2,6 +2,7 @@ import 'angular-resource';
 import 'angular-ui-router';
 import 'angular-ui-grid';
 import './../../node_modules/angular-ui-grid/ui-grid.css';
+import './aroma.css';
 
 import './../../services/services';
 
@@ -16,17 +17,36 @@ let aromaModule = angular.module('views.aroma', [
 ]);
 //  .service('Aromaservice', AromaService);
 
-aromaModule.controller("aromaListCtrl", $scope => {
-    // контроллер для управления вьюхой
-    //$scope.listTite = "Каталог аромок";
-    $scope.showLSNav = false;
-    $scope.toggleLSNav = function() {
-        console.log($scope.showLSNav);
-        $scope.showLSNav = !$scope.showLSNav;
+//aromaModule.controller("aromaListCtrl", ($scope, $mdDialog) => {
+// контроллер для управления вьюхой
+//$scope.listTite = "Каталог аромок";
+// $scope.showLSNav = false;
+// $scope.toggleLSNav = function() {
+//     console.log($scope.showLSNav);
+//     $scope.showLSNav = !$scope.showLSNav;
 
-    }
+// }
 
-});
+
+// $scope.showDialog = () => {
+//     $mdDialog.show({
+//         templateUrl: 'views/aroma/dlg.html',
+//         parent: angular.element(document.body),
+//         clickOutsideToClose: true,
+//         locals: {
+//             aTitle: 'Диалог-заглушка'
+//         },
+//         controller: ($scope, $mdDialog, aTitle) => {
+//             $scope.title = aTitle;
+
+//             $scope.closeDialog = function() {
+//                 $mdDialog.hide();
+//             }
+//         }
+//     });
+
+// }
+//});
 
 aromaModule.config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
@@ -67,12 +87,55 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
 
             }
         })
-        .state('aroma.add',{
-            url : '/add',
-            controller : function ($scope, $state, Aromaservice){
+        .state('aroma.add', {
+            url: '/add',
+            template: '<ui-view>',
+            controller: function($scope, $state, $mdDialog, AromaService) {
+
                 console.log('добавляем аромку');
+
+                $scope.aroma = new AromaService();
+
+                $mdDialog.show({
+                        templateUrl: 'views/aroma/dlg.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            aTitle: 'Диалог-заглушка',
+                            aroma: $scope.aroma
+                        },
+                        controller: ($scope, $mdDialog, aTitle, aroma) => {
+                            $scope.title = aTitle;
+                            $scope.aroma = aroma;
+
+                            $scope.cancel = function() {
+                                $mdDialog.cancel('user pressed canceled');
+                            };
+
+                            $scope.ok = function() {
+                                $mdDialog.hide({ message: 'here is some result data' });
+                            };
+
+                            // $scope.closeDialog = function() {
+                            //     $mdDialog.hide();
+                            // }
+                        }
+                    })
+                    .then(
+                        function(data) {
+                            console.log(data);
+                            $scope.aroma.$save();
+                            $state.go('^', null, { reload: true });
+                        },
+                        function() {
+                            $state.go('^');
+                        }
+                    );
+
+
+
             }
-        })
+        });
 
     //--
     //--

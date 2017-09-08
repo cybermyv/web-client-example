@@ -1,33 +1,32 @@
-<div ng-controller="aromaListCtrl">
+<!-- <div ng-controller="aromaListCtrl"> -->
 
-    <!-- див для отображения меню CRUD -->
-    <md-menu>
-        <md-button ng-click="$mdMenu.open()">Действия</md-button>
-        <md-menu-content>
-            <md-menu-item>
-                <!-- <md-button ng-click="addNewAroma()">Добавить
-                    </md-button> -->
-                <!-- <button class="md-button" type="button" ng-click="addNewAroma()">Добавить</button> -->
-                <a ui-sref='aroma.add' class="md-button" type="button">Добавить</a>
-            </md-menu-item>
-            <md-menu-item>
-                <md-button ng-click="addNewAroma()">Редактировать
-                </md-button>
-                
-            </md-menu-item>
-            <md-menu-item>
-                <md-button ng-click="addNewAroma()">Удалить
-                </md-button>
-            </md-menu-item>
-            <md-divider></md-divider>
-            <md-menu-item>
-                <md-button ng-click="addNewAroma()">Обновить
-                </md-button>
-            </md-menu-item>
-        </md-menu-content>
-    </md-menu>
-</div>
+<!-- див для отображения меню CRUD -->
+<md-menu>
+    <md-button ng-click="$mdMenu.open()">Действия</md-button>
+    <md-menu-content>
+        <md-menu-item>
+            <a ui-sref="aroma.add" class="md-button" type="button">Добавить</a>
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="showDialog()">Редактировать
+            </md-button>
+
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="showDialog()">Удалить
+            </md-button>
+        </md-menu-item>
+        <md-divider></md-divider>
+        <md-menu-item>
+            <md-button ng-click="showDialog()">Обновить
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>
+<!-- </div> -->
 
 <div ui-grid="gridOptions" ui-grid-selection class="grid"></div>
+
+<div ui-view=""></div>
 
 <!-- Див для отображения грида -->
