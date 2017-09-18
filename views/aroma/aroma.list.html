@@ -8,12 +8,11 @@
             <a ui-sref="aroma.add" class="md-button" type="button">Добавить</a>
         </md-menu-item>
         <md-menu-item>
-            <md-button ng-click="showDialog()">Редактировать
-            </md-button>
+            <a ui-sref="aroma.edit({id:mySelectedRows.entity.id})" class="md-button" type="button">Редактировать</a>
 
         </md-menu-item>
         <md-menu-item>
-            <md-button ng-click="showDialog()">Удалить
+            <md-button ng-click="removing()">Удалить
             </md-button>
         </md-menu-item>
         <md-divider></md-divider>

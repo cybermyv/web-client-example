@@ -15,38 +15,6 @@ let aromaModule = angular.module('views.aroma', [
     'ui.grid.selection',
     'ui.grid.resizeColumns'
 ]);
-//  .service('Aromaservice', AromaService);
-
-//aromaModule.controller("aromaListCtrl", ($scope, $mdDialog) => {
-// контроллер для управления вьюхой
-//$scope.listTite = "Каталог аромок";
-// $scope.showLSNav = false;
-// $scope.toggleLSNav = function() {
-//     console.log($scope.showLSNav);
-//     $scope.showLSNav = !$scope.showLSNav;
-
-// }
-
-
-// $scope.showDialog = () => {
-//     $mdDialog.show({
-//         templateUrl: 'views/aroma/dlg.html',
-//         parent: angular.element(document.body),
-//         clickOutsideToClose: true,
-//         locals: {
-//             aTitle: 'Диалог-заглушка'
-//         },
-//         controller: ($scope, $mdDialog, aTitle) => {
-//             $scope.title = aTitle;
-
-//             $scope.closeDialog = function() {
-//                 $mdDialog.hide();
-//             }
-//         }
-//     });
-
-// }
-//});
 
 aromaModule.config(($stateProvider, $urlRouterProvider) => {
     $stateProvider
@@ -59,7 +27,7 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
 
                 }
             },
-            controller: function($scope, $state, AromaService, aromas) {
+            controller: function($scope, $state, AromaService, aromas, $mdDialog) {
                 console.log(aromas);
                 $scope.dataGrid = aromas;
 
@@ -85,6 +53,48 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                     });
                 };
 
+                $scope.removing = function() {
+                    $scope.aroma = $scope.mySelectedRows.entity;
+                    console.log($scope.aroma);
+
+                    if (!$scope.aroma) {
+                        alert('Запись не выбрана'); // -- TODO: потом нужно будет заменить на нормальный аллерт
+
+                    } else {
+                        $mdDialog.show({
+                                templateUrl: 'views/aroma/aroma.del.html',
+                                parent: angular.element(document.body),
+                                clickOutsideToClose: true,
+                                locals: {
+
+                                    aroma: $scope.aroma
+                                },
+                                controller: ($scope, $mdDialog, aroma) => {
+                                    $scope.aroma = aroma;
+                                    $scope.cancel = function() {
+                                        console.log('cancel');
+                                        $mdDialog.cancel('user pressed canceled');
+                                    };
+
+                                    $scope.ok = function() {
+                                        console.log('Delete');
+                                        $mdDialog.hide({ message: 'here is some result data' });
+                                    };
+                                }
+                            })
+                            .then(
+                                function(data) {
+                                    $scope.aroma.$delete();
+                                    $state.reload();
+                                },
+                                function(data) {
+                                    //   console.log(data);
+                                    // $state.go('^');
+                                }
+                            );
+                    }
+                }
+
             }
         })
         .state('aroma.add', {
@@ -97,11 +107,11 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                 $scope.aroma = new AromaService();
 
                 $mdDialog.show({
-                        templateUrl: 'views/aroma/dlg.html',
+                        templateUrl: 'views/aroma/aroma.add.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
                         locals: {
-                            aTitle: 'Диалог-заглушка',
+                            aTitle: 'Добавить новую арому',
                             aroma: $scope.aroma
                         },
                         controller: ($scope, $mdDialog, aTitle, aroma) => {
@@ -109,31 +119,75 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                             $scope.aroma = aroma;
 
                             $scope.cancel = function() {
+                                console.log('cancel');
                                 $mdDialog.cancel('user pressed canceled');
                             };
 
                             $scope.ok = function() {
+                                console.log('Add');
                                 $mdDialog.hide({ message: 'here is some result data' });
                             };
-
-                            // $scope.closeDialog = function() {
-                            //     $mdDialog.hide();
-                            // }
                         }
                     })
                     .then(
                         function(data) {
-                            console.log(data);
+                            // console.log(data);
                             $scope.aroma.$save();
                             $state.go('^', null, { reload: true });
                         },
-                        function() {
+                        function(data) {
+                            //   console.log(data);
                             $state.go('^');
                         }
                     );
 
 
 
+            }
+        })
+        .state('aroma.edit', {
+            url: '/edit/{id:int}',
+            template: '<ui-view>',
+            resolve: {
+                aromaid: function(AromaService, $stateParams) {
+                    return AromaService.get({ id: $stateParams.id }).$promise;
+                }
+            },
+            controller: function($scope, $state, $mdDialog, AromaService) {
+                $scope.aromaid = $scope.$resolve.aromaid;
+
+                $mdDialog.show({
+                        templateUrl: 'views/aroma/aroma.edit.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            aromaid: $scope.aromaid
+                        },
+                        controller: ($scope, $mdDialog, aromaid) => {
+                            $scope.aromaid = aromaid;
+                            $scope.cancel = function() {
+                                // console.log('cancel');
+                                $mdDialog.cancel('user pressed canceled');
+                            };
+
+                            $scope.ok = function() {
+                                //console.log('Edit');
+                                $mdDialog.hide({ message: 'here is some result data' });
+                            };
+
+                        }
+                    })
+                    .then(
+                        function(data) {
+                            // console.log(data);
+                            $scope.aromaid.$update();
+                            $state.go('^', null, { reload: true });
+                        },
+                        function(data) {
+                            //   console.log(data);
+                            $state.go('^');
+                        }
+                    );
             }
         });
 
