@@ -71,6 +71,7 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                                 },
                                 controller: ($scope, $mdDialog, aroma) => {
                                     $scope.aroma = aroma;
+
                                     $scope.cancel = function() {
                                         console.log('cancel');
                                         $mdDialog.cancel('user pressed canceled');
@@ -151,20 +152,30 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
             resolve: {
                 aromaid: function(AromaService, $stateParams) {
                     return AromaService.get({ id: $stateParams.id }).$promise;
+                },
+                listMan: function(AromaService) {
+                    return AromaService.getMnufacturer({ man: true }).$promise;
                 }
             },
             controller: function($scope, $state, $mdDialog, AromaService) {
                 $scope.aromaid = $scope.$resolve.aromaid;
+                $scope.listMan = $scope.$resolve.listMan;
 
                 $mdDialog.show({
                         templateUrl: 'views/aroma/aroma.edit.html',
                         parent: angular.element(document.body),
                         clickOutsideToClose: true,
                         locals: {
-                            aromaid: $scope.aromaid
+                            aromaid: $scope.aromaid,
+                            listMan: $scope.listMan
                         },
-                        controller: ($scope, $mdDialog, aromaid) => {
+                        controller: ($scope, $mdDialog, aromaid, listMan) => {
                             $scope.aromaid = aromaid;
+                            ///--загружаем данные в дропдаун
+                            $scope.listMan = listMan;
+
+                            //  debugger;
+
                             $scope.cancel = function() {
                                 // console.log('cancel');
                                 $mdDialog.cancel('user pressed canceled');

@@ -12,10 +12,21 @@
             <input ng-model="aromaid.nameeng">
         </md-input-container>
 
-        <md-input-container>
+        <!-- <md-input-container>
             <label>Производитель</label>
             <input ng-model="aromaid.manufacturer">
+        </md-input-container> -->
+
+        <md-input-container>
+            <label>Производитель</label>
+            <md-select ng-model="aromaid.manufacturer">
+                <md-option><em>None</em></md-option>
+                <md-option ng-repeat="list in listMan" ng-value="list.name">
+                    {{list.name}}
+                </md-option>
+            </md-select>
         </md-input-container>
+
     </md-dialog-content>
 
     <md-dialog-actions align="end">
