@@ -1,4 +1,4 @@
-<md-dialog>
+<md-dialog id="dialog-aroma-edit">
     <md-dialog-content class="md-dialog-content">
         <h2>Редактирование аромки</h2>
 
@@ -12,14 +12,11 @@
             <input ng-model="aromaid.nameeng">
         </md-input-container>
 
-        <!-- <md-input-container>
-            <label>Производитель</label>
-            <input ng-model="aromaid.manufacturer">
-        </md-input-container> -->
 
-        <md-input-container>
+
+        <md-input-container id="select-aroma-edit">
             <label>Производитель</label>
-            <md-select ng-model="aromaid.manufacturer">
+            <md-select ng-model="aromaid.manufacturer" style="width:200px">
                 <md-option><em>None</em></md-option>
                 <md-option ng-repeat="list in listMan" ng-value="list.name">
                     {{list.name}}
@@ -27,10 +24,12 @@
             </md-select>
         </md-input-container>
 
+
+
     </md-dialog-content>
 
     <md-dialog-actions align="end">
         <md-button class="md-primary" ng-click="cancel()"> Закрыть</md-button>
         <md-button class="md-primary" ng-click="ok()"> Сохранить</md-button>
     </md-dialog-actions>
-    </md-dialog
+</md-dialog>

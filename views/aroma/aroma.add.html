@@ -19,7 +19,22 @@
             <label>Английское название</label>
             <input ng-model="aroma.nameeng">
         </md-input-container>
+
+        <md-input-container id="select-aroma-edit">
+            <label>Производитель</label>
+            <md-select ng-model="aroma.manufacturer" style="width:200px">
+                <md-option><em>None</em></md-option>
+                <md-option ng-repeat="list in listMan" ng-value="list.name">
+                    {{list.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
     </md-dialog-content>
+
+
+
+
     <md-dialog-actions align="end">
         <md-button class="md-primary" ng-click="cancel()"> Закрыть</md-button>
         <md-button class="md-primary" ng-click="ok()"> Сохранить</md-button>

@@ -1,0 +1,10 @@
+ #dialog-aroma-edit {
+     width: 40%;
+     /* text-align: center; */
+     /* line-height: 100%; */
+     display: flex;
+ }
+ 
+ #select-aroma-edit {
+     margin-top: -6px;
+ }

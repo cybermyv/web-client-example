@@ -13,7 +13,8 @@ let aromaModule = angular.module('views.aroma', [
     'ui.grid',
     'ui.grid.edit',
     'ui.grid.selection',
-    'ui.grid.resizeColumns'
+    'ui.grid.resizeColumns',
+    'ui.grid.autoResize'
 ]);
 
 aromaModule.config(($stateProvider, $urlRouterProvider) => {
@@ -35,6 +36,7 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                     data: $scope.dataGrid,
                     //columnDefs
                     enableRowSelection: true,
+                    showGridFooter: true,
                     enableRowHeaderSelection: false,
                     multiSelect: false,
                     enableRowHashing: false
@@ -101,11 +103,20 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
         .state('aroma.add', {
             url: '/add',
             template: '<ui-view>',
+            resolve: {
+                listMan: function(AromaService) {
+                    return AromaService.getMnufacturer({ man: true }).$promise;
+                }
+            },
             controller: function($scope, $state, $mdDialog, AromaService) {
 
-                console.log('добавляем аромку');
+                //   console.log('добавляем аромку');
 
+                $scope.listMan = $scope.$resolve.listMan;
+                //  debugger;
                 $scope.aroma = new AromaService();
+
+
 
                 $mdDialog.show({
                         templateUrl: 'views/aroma/aroma.add.html',
@@ -113,11 +124,18 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                         clickOutsideToClose: true,
                         locals: {
                             aTitle: 'Добавить новую арому',
-                            aroma: $scope.aroma
+                            aroma: $scope.aroma,
+                            listMan: $scope.listMan
+
                         },
-                        controller: ($scope, $mdDialog, aTitle, aroma) => {
+                        controller: ($scope, $mdDialog, aTitle, aroma, listMan) => {
                             $scope.title = aTitle;
                             $scope.aroma = aroma;
+                            $scope.listMan = listMan;
+
+                            //     debugger;
+
+
 
                             $scope.cancel = function() {
                                 console.log('cancel');
@@ -168,6 +186,7 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                         locals: {
                             aromaid: $scope.aromaid,
                             listMan: $scope.listMan
+
                         },
                         controller: ($scope, $mdDialog, aromaid, listMan) => {
                             $scope.aromaid = aromaid;

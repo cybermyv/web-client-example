@@ -7,7 +7,7 @@ let services = angular.module('services', ['ngResource'])
 
             return $resource('/api/v01/aroma/:id', { id: '@id' }, {
                 update: { method: 'PUT' },
-                getMnufacturer: { method: 'GET', isArray: true }
+                getMnufacturer: { method: 'GET',params:{man:'true'}, isArray: true }
             });
         });
 
