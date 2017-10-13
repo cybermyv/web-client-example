@@ -39,7 +39,16 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                     showGridFooter: true,
                     enableRowHeaderSelection: false,
                     multiSelect: false,
-                    enableRowHashing: false
+                    enableRowHashing: false,
+                    enableFiltering: true,
+                    columnDefs: [
+                        { field: 'id', displayName: '#', enableFiltering: false },
+                        { field: 'namerus', displayName: 'Русское название' },
+                        { field: 'nameeng', displayName: 'Английское название' },
+                        { field: 'manufacturer', displayName: 'Производитель' }
+                    ]
+
+
                 }; // $scope.gridOptions
 
                 $scope.gridOptions.onRegisterApi = function(gridApi) {
@@ -50,17 +59,25 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                     gridApi.selection.on.rowSelectionChanged($scope, row => {
 
                         $scope.mySelectedRows = row;
-                        //    console.log($scope.mySelectedRows);
+                        $scope.aroma = $scope.mySelectedRows.entity;
+                        console.log($scope.mySelectedRows);
                         // debugger;
                     });
-                };
+                }
 
                 $scope.removing = function() {
-                    $scope.aroma = $scope.mySelectedRows.entity;
+                    //$scope.aroma = $scope.mySelectedRows.entity;
                     console.log($scope.aroma);
 
                     if (!$scope.aroma) {
-                        alert('Запись не выбрана'); // -- TODO: потом нужно будет заменить на нормальный аллерт
+                        let dlgConst = $mdDialog
+                            .alert()
+                            .title("Внимание!")
+                            .textContent("Запись не выбрана!")
+                            .ok("Закрыть")
+
+                        $mdDialog.show(dlgConst);
+
 
                     } else {
                         $mdDialog.show({
@@ -189,7 +206,13 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
 
                         },
                         controller: ($scope, $mdDialog, aromaid, listMan) => {
+
+                            //  $scope.aroma = $scope.mySelectedRows.entity;
+                            console.log('редактируем', $scope.aroma);
+
+
                             $scope.aromaid = aromaid;
+
                             ///--загружаем данные в дропдаун
                             $scope.listMan = listMan;
 

@@ -1,0 +1,27 @@
+<!-- див для отображения меню CRUD -->
+<md-menu>
+    <md-button ng-click="$mdMenu.open()">Действия</md-button>
+    <md-menu-content>
+        <md-menu-item>
+            <a ui-sref="aroma.add" class="md-button" type="button">Добавить</a>
+        </md-menu-item>
+        <md-menu-item>
+            <a ui-sref="aroma.edit({id:mySelectedRows.entity.id})" class="md-button" type="button">Редактировать</a>
+
+        </md-menu-item>
+        <md-menu-item>
+            <md-button ng-click="manRemoving()">Удалить
+            </md-button>
+        </md-menu-item>
+        <md-divider></md-divider>
+        <md-menu-item>
+            <md-button ng-click="showDialog()">Обновить
+            </md-button>
+        </md-menu-item>
+    </md-menu-content>
+</md-menu>
+<!-- </div> -->
+
+<div ui-grid="gridOptions" ui-grid-selection class="grid" ui-grid-auto-resize style="height:600px"></div>
+
+<div ui-view=""></div>
