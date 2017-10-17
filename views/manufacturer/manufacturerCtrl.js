@@ -114,5 +114,86 @@ manufactureModule.config(($stateProvider, $urlRouterProvider) => {
 
 
         })
+        .state('manufacturer.add', {
+            url: '/add',
+            template: '<ui-view>',
+
+            controller: function($scope, $state, $mdDialog, ManufacturerService) {
+                $scope.manufacturer = new ManufacturerService();
+                $mdDialog.show({
+                        templateUrl: 'views/manufacturer/manufacturer.add.html',
+                        parentr: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            aTitle: 'Добавить нового производителя аромок',
+                            manufacturer: $scope.manufacturer
+                        },
+                        controller: ($scope, manufacturer, $mdDialog, aTitle) => {
+                            $scope.title = aTitle;
+                            $scope.manufacturer = manufacturer;
+
+                            $scope.cancel = () => {
+                                console.log('cancel');
+                                $mdDialog.cancel({ message: 'Отменили добавление производителя' });
+                            };
+
+                            $scope.ok = () => {
+                                console.log('add');
+                                $mdDialog.hide({ message: 'Добавили нового производителя' });
+                            }
+                        }
+                    })
+                    .then(
+                        data => {
+                            $scope.manufacturer.$save();
+                            $state.go('^', null, { reload: true });
+                        },
+                        data => {
+                            $state.go('^')
+                        });
+            }
+        })
+        .state('manufacturer.edit', {
+            url: '/edit/{id:int}',
+            template: '<ui-view>',
+            resolve: {
+                manid: function(ManufacturerService, $stateParams) {
+                    return ManufacturerService.get({ id: $stateParams.id }).$promise
+                }
+            },
+            controller: function($scope, $state, $mdDialog, ManufacturerService) {
+                $scope.manid = $scope.$resolve.manid;
+                $mdDialog.show({
+                        templateUrl: 'views/manufacturer/manufacturer.edit.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            manid: $scope.manid
+                        },
+
+                        controller: ($scope, $mdDialog, manid) => {
+                            $scope.manid = manid;
+                            $scope.cancel = () => {
+                                $mdDialog.cancel({ message: 'Отменили редактирование производителя' });
+                            };
+                            $scope.ok = () => {
+                                $mdDialog.hide({ message: 'Редактируем производителя' });
+                            }
+                        }
+
+                    })
+                    .then(
+                        data => {
+                            $scope.manid.$update();
+                            $state.go('^', null, { reload: true });
+                        },
+                        data => {
+                            $state.go('^');
+                        }
+                    )
+
+            }
+        })
+
 });
 export default manufactureModule;

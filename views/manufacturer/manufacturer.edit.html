@@ -1,0 +1,20 @@
+<md-dialog id="dialog-aroma-edit">
+    <md-dialog-content class="md-dialog-content">
+        <h2>Редактирование производетелей аромок</h2>
+
+        <md-input-container>
+            <label>Название</label>
+            <input ng-model="manid.name">
+        </md-input-container>
+
+        <md-input-container>
+            <label>Ссылка на сайт производителя</label>
+            <input ng-model="manid.url">
+        </md-input-container>
+    </md-dialog-content>
+
+    <md-dialog-actions align="end">
+        <md-button class="md-primary" ng-click="cancel()"> Закрыть</md-button>
+        <md-button class="md-primary" ng-click="ok()"> Сохранить</md-button>
+    </md-dialog-actions>
+</md-dialog>
