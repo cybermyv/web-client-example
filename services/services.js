@@ -17,12 +17,12 @@ let services = angular.module('services', ['ngResource'])
                 update: { method: 'PUT' }
             });
         })
-        .service('RecieptService',
-    function($resource){
-        return $resource('/api/v01/reciept/:id',{id:'@id'},{
-            update:{method:'PUT'}
-        })
-    });
+    .service('RecieptService',
+        function($resource) {
+            return $resource('/api/v01/reciept/:id', { id: '@id' }, {
+                update: { method: 'PUT' }
+            })
+        });
 
 
 export default services;
