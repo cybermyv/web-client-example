@@ -2,7 +2,7 @@ import 'angular-resource';
 import 'angular-ui-router';
 import 'angular-ui-grid';
 import './../../node_modules/angular-ui-grid/ui-grid.css';
-//import './aroma.css';
+import './reciept.css';
 
 import './../../services/services';
 
@@ -33,36 +33,36 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                 console.log(reciepts);
                 //-- настраиваем грид
 
-                $scope.dataGrid = reciepts;
-                $scope.gridOptions = {
-                    data: $scope.dataGrid,
-                    //columnDefs
-                    enableRowSelection: true,
-                    showGridFooter: true,
-                    enableRowHeaderSelection: false,
-                    multiSelect: false,
-                    enableRowHashing: false,
-                    enableFiltering: true,
-                    columnDefs: [
-                        { field: 'id', displayName: '#' },
-                        { field: 'name', displayName: 'Название' },
-                        { field: 'tag', displayName: 'Тег' }
-                    ]
+                // $scope.dataGrid = reciepts;
+                // $scope.gridOptions = {
+                //     data: $scope.dataGrid,
+                //     //columnDefs
+                //     enableRowSelection: true,
+                //     showGridFooter: true,
+                //     enableRowHeaderSelection: false,
+                //     multiSelect: false,
+                //     enableRowHashing: false,
+                //     enableFiltering: true,
+                //     columnDefs: [
+                //         { field: 'id', displayName: '#' },
+                //         { field: 'name', displayName: 'Название' },
+                //         { field: 'tag', displayName: 'Тег' }
+                //     ]
 
-                }; // gridOptions
-                $scope.gridOptions.onRegisterApi = function(gridApi) {
-                    $scope.gridApi = gridApi;
+                // }; // gridOptions
+                // $scope.gridOptions.onRegisterApi = function(gridApi) {
+                //     $scope.gridApi = gridApi;
 
-                    $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+                //     $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
 
-                    gridApi.selection.on.rowSelectionChanged($scope, row => {
+                //     gridApi.selection.on.rowSelectionChanged($scope, row => {
 
-                        $scope.mySelectedRows = row;
-                        $scope.mans = $scope.mySelectedRows.entity;
-                        console.log($scope.mySelectedRows);
-                        // debugger;
-                    });
-                }; //onRegisterApi
+                //         $scope.mySelectedRows = row;
+                //         $scope.mans = $scope.mySelectedRows.entity;
+                //         console.log($scope.mySelectedRows);
+                //         // debugger;
+                //     });
+                // }; //onRegisterApi
             }
         })
 })

@@ -1,0 +1,13 @@
+.reciept-list {
+    width: 100%;
+}
+
+.md-list-item-text>.reciept-item {
+    font-weight: 600!important;
+    color: #000000!important;
+    ;
+}
+
+.md-list-item-text .aroma-item {
+    font: bold italic 110% serif;
+}
