@@ -1,13 +1,25 @@
-.reciept-list {
+ .reciept-list {
     width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.md-list-item-text{
+    padding: 0;
+    margin: 0 auto;
+}
+.md-list-item-text p{
+
 }
 
 .md-list-item-text>.reciept-item {
-    font-weight: 600!important;
+    font-weight: 600 !important;
     color: #000000!important;
     ;
 }
 
 .md-list-item-text .aroma-item {
-    font: bold italic 110% serif;
-}
+    padding-left: 20px; 
+    font: bold italic 110% italic; 
+    color: #000000!important;
+} 

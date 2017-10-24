@@ -11,7 +11,7 @@
 <md-list class="reciept-list">
     <md-list-item class="md-2-line reciept-list__item" ng-repeat="item in $resolve.reciepts" ng>
         <div class="md-list-item-text" layout="column">
-            <p class="reciept-item"> <span class="reciept-item__head">№-{{item.id}} наименование {{item.name}}</span> <span class="reciept-item__tail">тэг {{item.tag}} {{item.vol}}</span> </p>
+            <p class="reciept-item"> <span class="reciept-item__head">№-{{item.id}} наименование {{item.name}}</span> <span class="reciept-item__tail"># {{item.tag}} {{item.vol}}</span> </p>
 
             <p class="aroma-item" ng-repeat="aroma in item.aromas">{{aroma.id}} {{aroma.parent}} {{aroma.aromaid}}</p>
 
