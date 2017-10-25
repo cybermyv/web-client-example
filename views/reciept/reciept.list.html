@@ -10,12 +10,13 @@
 <!-- <div ui-grid="gridOptions" ui-grid-selection class="grid" ui-grid-auto-resize style="height:600px"></div> -->
 
 <md-list class="reciept-list" layout-padding>
-    <md-list-item class="md-2-line reciept-list__item" ng-repeat="item in $resolve.reciepts" ng-click="toggleRight()">
+    <input ng-model="searchText">
+    <md-list-item class="md-2-line reciept-list__item" ng-repeat="item in $resolve.reciepts" ng-click="toggleRight() ">
         <!-- ng-hide="isOpenRight() -->
         <div class="md-list-item-text" layout="column">
             <p class="reciept-item"> <span class="reciept-item__num">№{{item.id}} </span> <span class="reciept-item__head">{{item.name}}</span> <span class="reciept-item__tail"> {{item.vol}}мл. (VG/PG/N)-({{item.vg}}/{{item.pg}}/{{item.n}}) #{{item.tag}}</span> </p>
 
-            <p class="aroma-item" ng-repeat="aroma in item.aromas">{{aroma.neng}} ({{aroma.nrus}}) {{aroma.val}}</p>
+            <p class="aroma-item" ng-repeat="aroma in item.aromas|filter:{ nrus : searchText }">{{aroma.neng}} ({{aroma.nrus}}) {{aroma.val}}</p>
 
         </div>
         <md-divider></md-divider>
@@ -48,7 +49,7 @@
     </md-sidenav>
 </mat-sidenav-container>
 
-<!-- <div ui-view=""></div> -->
+<!-- <div ui-view=""></div> так не делаем в случае с материал-->
 <md-content ui-view layout="column" flex></md-content>
 
 
