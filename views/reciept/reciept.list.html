@@ -1,28 +1,60 @@
-<md-toolbar class="md-theme-light">
-    <h2 class="md-toolbar-tools">
-        <span>Список рецептов</span>
-    </h2>
-</md-toolbar>
-
-<!-- </div> -->
-
-<!-- <div ui-grid="gridOptions" ui-grid-selection class="grid" ui-grid-auto-resize style="height:600px"></div> -->
-
-<md-list class="reciept-list">
-    <md-list-item class="md-2-line reciept-list__item" ng-repeat="item in $resolve.reciepts" ng>
-        <div class="md-list-item-text" layout="column">
-            <p class="reciept-item"> <span class="reciept-item__head">№-{{item.id}} наименование {{item.name}}</span> <span class="reciept-item__tail"># {{item.tag}} {{item.vol}}</span> </p>
-
-            <p class="aroma-item" ng-repeat="aroma in item.aromas">{{aroma.id}} {{aroma.parent}} {{aroma.aromaid}}</p>
-
-        </div>
-        <md-divider></md-divider>
-
-    </md-list-item>
-</md-list>
+<md-content layout-padding>
 
 
-<div ui-view=""></div>
+    <md-sidenav class="md-sidenav-right" md-component-id="right" md-whiteframe="4">
+        <!-- md-disable-backdrop  -->
+
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Sidenav Right</h1>
+        </md-toolbar>
+        <md-content layout-margin>
+            <form>
+                <md-input-container>
+                    <label for="testInput">Test input</label>
+                    <input type="text" id="testInput" ng-model="aroma" md-autofocus>
+                </md-input-container>
+            </form>
+            <md-button ng-click="close()" class="md-primary">
+                Close Sidenav Right
+            </md-button>
+        </md-content>
+
+    </md-sidenav>
+
+
+
+    <md-toolbar class="md-theme-light">
+        <h2 class="md-toolbar-tools">
+            <span>Список рецептов</span>
+        </h2>
+    </md-toolbar>
+
+    <!-- </div> -->
+
+    <!-- <div ui-grid="gridOptions" ui-grid-selection class="grid" ui-grid-auto-resize style="height:600px"></div> -->
+
+    <md-list class="reciept-list" style="height:100%">
+        <md-list-item class="md-2-line reciept-list__item" ng-repeat="item in $resolve.reciepts" ng-click="toggleRight()">
+            <!-- ng-hide="isOpenRight() -->
+            <div class="md-list-item-text" layout="column">
+                <p class="reciept-item"> <span class="reciept-item__num">№{{item.id}} </span> <span class="reciept-item__head">{{item.name}}</span> <span class="reciept-item__tail"> {{item.vol}}мл. (VG/PG/N)-({{item.vg}}/{{item.pg}}/{{item.n}}) #{{item.tag}}</span> </p>
+
+                <p class="aroma-item" ng-repeat="aroma in item.aromas">{{aroma.neng}} ({{aroma.nrus}}) {{aroma.val}}</p>
+
+            </div>
+            <md-divider></md-divider>
+
+        </md-list-item>
+    </md-list>
+
+    <!-- панель редактирования -->
+    <div ui-view=""></div>
+
+
+
+</md-content>
+
+
 
 <!-- Див для отображения грида -->
 

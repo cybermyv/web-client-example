@@ -29,8 +29,37 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                     return RecieptService.query().$promise;
                 }
             },
-            controller: function($scope, $state, RecieptService, reciepts) {
+            controller: function($scope, $state, RecieptService, reciepts, $mdSidenav) {
                 console.log(reciepts);
+
+                //-- оживляем панельку редактирования
+
+                $scope.toggleRight = buildToggler('right');
+                $scope.isOpenRight = function() {
+                    return $mdSidenav('right').isOpen();
+                };
+
+                function buildToggler(navID) {
+                    return function() {
+                        // Component lookup should always be available since we are not using `ng-if`
+                        $mdSidenav(navID)
+                            .toggle()
+                            .then(function() {
+                                console.log("toggle " + navID + " is done");
+                            });
+                    };
+                };
+
+
+                $scope.close = function() {
+                    // Component lookup should always be available since we are not using `ng-if`
+                    $mdSidenav('right').close()
+                        .then(function() {
+                            console.log("close RIGHT is done");
+                        });
+                };
+
+
                 //-- настраиваем грид
 
                 // $scope.dataGrid = reciepts;
@@ -65,4 +94,7 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                 // }; //onRegisterApi
             }
         })
+
 })
+
+export default recieptModule;
