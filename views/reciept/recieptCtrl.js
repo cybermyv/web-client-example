@@ -6,6 +6,7 @@ import './reciept.css';
 
 import './../../services/services';
 
+
 let recieptModule = angular.module('views.reciept', [
     'services',
     'ngResource',
@@ -34,67 +35,80 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
 
                 //-- оживляем панельку редактирования
 
-                $scope.toggleRight = buildToggler('right');
-                $scope.isOpenRight = function() {
-                    return $mdSidenav('right').isOpen();
-                };
+                // $scope.toggleRight = buildToggler('right');
+                // $scope.isOpenRight = function() {
+                //     return $mdSidenav('right').isOpen();
+                // };
 
-                function buildToggler(navID) {
-                    return function() {
-                        // Component lookup should always be available since we are not using `ng-if`
-                        $mdSidenav(navID)
-                            .toggle()
-                            .then(function() {
-                                console.log("toggle " + navID + " is done");
-                            });
-                    };
-                };
+                // function buildToggler(navID) {
+                //     return function() {
 
-
-                $scope.close = function() {
-                    // Component lookup should always be available since we are not using `ng-if`
-                    $mdSidenav('right').close()
-                        .then(function() {
-                            console.log("close RIGHT is done");
-                        });
-                };
+                //         $mdSidenav(navID)
+                //             .toggle()
+                //             .then(function() {
+                //                 console.log("toggle " + navID + " is done");
+                //             });
+                //     };
+                // };
 
 
-                //-- настраиваем грид
+                // $scope.close = function() {
+                //     // Component lookup should always be available since we are not using `ng-if`
+                //     $mdSidenav('right').close()
+                //         .then(function() {
+                //             console.log("close RIGHT is done");
+                //         });
+                // };
 
-                // $scope.dataGrid = reciepts;
-                // $scope.gridOptions = {
-                //     data: $scope.dataGrid,
-                //     //columnDefs
-                //     enableRowSelection: true,
-                //     showGridFooter: true,
-                //     enableRowHeaderSelection: false,
-                //     multiSelect: false,
-                //     enableRowHashing: false,
-                //     enableFiltering: true,
-                //     columnDefs: [
-                //         { field: 'id', displayName: '#' },
-                //         { field: 'name', displayName: 'Название' },
-                //         { field: 'tag', displayName: 'Тег' }
-                //     ]
 
-                // }; // gridOptions
-                // $scope.gridOptions.onRegisterApi = function(gridApi) {
-                //     $scope.gridApi = gridApi;
 
-                //     $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+            }
+        })
+        .state('reciept.add', {
+            url: '/add',
+            template: '<ui-view>',
+            //resolve - потом определимся, что тут надо возвращать. может быть список аромок
+            controller: function($scope, $state, $mdDialog, RecieptService) {
+                console.log('Добавить рецепт');
+                $scope.reciept = new RecieptService();
 
-                //     gridApi.selection.on.rowSelectionChanged($scope, row => {
+                $mdDialog.show({
+                        templateUrl: 'views/reciept/reciept.add.html',
+                        parent: angular.element(document.body),
+                        clickOutsideToClose: true,
+                        locals: {
+                            aTitle: 'Добавить новый рецепт',
+                            reciept: $scope.reciept
+                                //-- надо добавить вывод аромок -- Автокомплит
+                        }, //locals
+                        controller: ($scope, $mdDialog, aTitle, reciept) => {
+                                $scope.title = aTitle;
+                                $scope.reciept = reciept;
+                                $scope.cancel = function() {
+                                    console.log('cancel');
+                                    $mdDialog.cancel('user pressed canceled');
+                                };
 
-                //         $scope.mySelectedRows = row;
-                //         $scope.mans = $scope.mySelectedRows.entity;
-                //         console.log($scope.mySelectedRows);
-                //         // debugger;
-                //     });
-                // }; //onRegisterApi
+                                $scope.ok = function() {
+                                    console.log('Add');
+                                    $mdDialog.hide({ message: 'here is some result data' });
+                                };
+                            } //controller
+                    })
+                    .then(
+                        function(data) {
+                            // console.log(data);
+                            $scope.reciept.$save();
+                            $state.go('^', null, { reload: true });
+                        },
+                        function(data) {
+                            //   console.log(data);
+                            $state.go('^');
+                        }
+                    );
             }
         })
 
-})
+});
 
 export default recieptModule;

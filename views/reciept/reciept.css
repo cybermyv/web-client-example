@@ -1,38 +1,69 @@
- .reciept-list {
-     width: 100%;
-     padding: 0;
-     margin: 0 auto;
- }
- 
- .md-list-item-text {
-     padding: 0;
-     margin: 0 auto;
- }
- 
- .md-list-item-text p {}
- 
- .md-list-item-text>.reciept-item {
-     font-weight: 600 !important;
-     color: #000000!important;
-     ;
- }
- 
- .md-list-item-text>.reciept-item .reciept-item__num {
-     color: #7c7a7a!important;
- }
- 
- .md-list-item-text>.reciept-item .reciept-item__tail {
-     color: #7c7a7a!important;
- }
- 
- .md-list-item-text .aroma-item {
-     padding-left: 30px;
-     font: bold italic 110% italic;
-     color: #000000!important;
- }
- 
- mat-sidenav-container {
-     margin: 0;
-     width: 100%;
-     height: 100%;
- }
+md-toolbar md-input-container {
+    vertical-align: middle;
+}
+
+md-toolbar md-input-container .md-input {
+    color: #ffffff;
+}
+
+md-toolbar md-input-container:not(.md-input-invalid) label {
+    color: hsl(202, 51%, 73%);
+    font-size: 12pt;
+}
+
+md-toolbar md-input-container:not(.md-input-invalid).md-input-focused label {
+    color: #ffffff
+}
+
+.reciept-button,
+.reciept-list__button {
+    background-color: rgb(95, 132, 201) !important;
+}
+
+.reciept-list__button:hover,
+.reciept-button:hover {
+    background-color: rgb(48, 48, 172) !important;
+}
+
+.reciept-list {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.md-list-item-text {
+    padding: 0;
+    margin: 0 auto;
+}
+
+.md-list-item-text p {}
+
+.md-list-item-text>.reciept-item {
+    font-weight: 600 !important;
+    color: #000000!important;
+    ;
+}
+
+.md-list-item-text>.reciept-item .reciept-item__num {
+    color: #7c7a7a!important;
+}
+
+.md-list-item-text>.reciept-item .reciept-item__tail {
+    color: #7c7a7a!important;
+}
+
+.md-list-item-text .aroma-item {
+    padding-left: 30px;
+    font: bold italic 110% italic;
+    color: #000000!important;
+}
+
+
+/* md-sidenav,
+md-sidenav.md-locked-open-add-active,
+md-sidenav.md-closed.md-locked-open-add-active,
+md-sidenav.md-locked-open {
+    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
+} */
