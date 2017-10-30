@@ -71,6 +71,10 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
             controller: function($scope, $state, $mdDialog, RecieptService) {
                 console.log('Добавить рецепт');
                 $scope.reciept = new RecieptService();
+                
+                $scope.choices = [{id:1, name:'aroma1'},{id:2, name:'aroma2'}];
+
+               
 
                 $mdDialog.show({
                         templateUrl: 'views/reciept/reciept.add.html',
@@ -78,12 +82,33 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                         clickOutsideToClose: true,
                         locals: {
                             aTitle: 'Добавить новый рецепт',
-                            reciept: $scope.reciept
+                            reciept: $scope.reciept,
+                            choices :$scope.choices
                                 //-- надо добавить вывод аромок -- Автокомплит
                         }, //locals
-                        controller: ($scope, $mdDialog, aTitle, reciept) => {
+                        controller: ($scope, $mdDialog, aTitle, reciept, choices) => {
                                 $scope.title = aTitle;
                                 $scope.reciept = reciept;
+                                $scope.choices = choices;
+
+                                console.log (choices);
+                                //-- передать сюда список аромок, и их нужно искать по русскому и англ. названиям. 
+                                //-- пока делаем все просто.
+                               
+
+                                $scope.addNewChoice = ()=>{
+                                    let newItem = $scope.choices.length + 1;
+                                    $scope.choices.push({id:newItem, name:'aroma'+newItem}); //-- прикольный способ вставлять прямо в массив
+
+                                };
+                                
+                                $scope.removeChoice = ()=> {
+                                    var lastItem = $scope.choices.length-1;
+                                    $scope.choices.splice(lastItem);
+                                  };
+
+                                
+
                                 $scope.cancel = function() {
                                     console.log('cancel');
                                     $mdDialog.cancel('user pressed canceled');

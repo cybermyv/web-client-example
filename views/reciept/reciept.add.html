@@ -36,7 +36,7 @@
                 <input ng-model="reciept.n">
             </md-input-container>
         </div>
-        <md-input-container id="select-aroma-edit">
+        <!-- <md-input-container id="select-aroma-edit">
             <label>Производитель</label>
             <md-select ng-model="aroma.manufacturer" style="width:200px">
                 <md-option><em>None</em></md-option>
@@ -44,7 +44,37 @@
                     {{list.name}}
                 </md-option>
             </md-select>
-        </md-input-container>
+        </md-input-container> -->
+
+        <div layout="column">
+            <!-- динамическое добавление аромок -->
+            <!-- <input type="text" ng-model="choice.id" placeholder="ID аромки"> -->
+            
+            <fieldset ng-repeat="choice in choices">
+                 <!-- <input type="text" ng-model="choice.id" placeholder="ID аромки"> -->
+
+                 <!-- <md-input-container> -->
+                        <label>ID аромки</label>
+                        <input type="text" ng-model="choice.id">
+                    <!-- </md-input-container> -->
+                    
+                    <!-- <md-input-container> -->
+                            <label>Объем аромки</label>
+                            <input type="text" ng-model="choice.name">
+                    <!-- </md-input-container> -->
+                    <md-button class="md-fab md-mini md-primary" ng-show="$last" ng-click="removeChoice()">
+                            <md-icon md-svg-src="./../../icons/ic_delete_forever_white_24px.svg" style="width: 12px; height: 12px;"></md-icon>
+                        </md-button>
+
+                 <!-- <input type="text" ng-model="choice.name" placeholder="Объем аромки"> -->
+                 <!-- <button class="remove" ng-show="$last" ng-click="removeChoice()">-</button> -->
+             </fieldset> 
+            
+            <md-dialog-actions align="end">
+                <md-button class="md-primary" ng-click="addNewChoice()">Добавить аромку</md-button>
+            </md-dialog-actions>    
+
+        </div>
 
     </md-dialog-content>
     <md-dialog-actions align="end">
