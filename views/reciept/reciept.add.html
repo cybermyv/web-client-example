@@ -7,12 +7,33 @@
         <div layout="row">
             <md-input-container>
                 <label>Название рецепта</label>
-                <input ng-model="aroma.namerus">
+                <input ng-model="reciept.name">
             </md-input-container>
 
             <md-input-container>
                 <label>Тэг#</label>
-                <input ng-model="aroma.nameeng">
+                <input ng-model="reciept.tag">
+            </md-input-container>
+        </div>
+        <div layout="row">
+            <md-input-container>
+                <label>Мин объем (мл.)</label>
+                <input ng-model="reciept.vol">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Глицерин (VG%)</label>
+                <input ng-model="reciept.vg">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Пропиленгликоль (PG%)</label>
+                <input ng-model="reciept.pg">
+            </md-input-container>
+
+            <md-input-container>
+                <label>Никотин (N мг.)</label>
+                <input ng-model="reciept.n">
             </md-input-container>
         </div>
         <md-input-container id="select-aroma-edit">
@@ -25,13 +46,7 @@
             </md-select>
         </md-input-container>
 
-
-
     </md-dialog-content>
-
-
-
-
     <md-dialog-actions align="end">
         <md-button class="md-primary" ng-click="cancel()"> Закрыть</md-button>
         <md-button class="md-primary" ng-click="ok()"> Сохранить</md-button>

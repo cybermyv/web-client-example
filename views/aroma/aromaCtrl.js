@@ -49,6 +49,7 @@ aromaModule.config(($stateProvider, $urlRouterProvider) => {
                     ]
 
 
+
                 }; // $scope.gridOptions
 
                 $scope.gridOptions.onRegisterApi = function(gridApi) {

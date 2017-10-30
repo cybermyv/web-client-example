@@ -97,7 +97,7 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                     })
                     .then(
                         function(data) {
-                            // console.log(data);
+                            console.log(data);
                             $scope.reciept.$save();
                             $state.go('^', null, { reload: true });
                         },
