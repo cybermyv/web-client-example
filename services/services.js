@@ -20,7 +20,8 @@ let services = angular.module('services', ['ngResource'])
     .service('RecieptService',
         function($resource) {
             return $resource('/api/v01/reciept/:id', { id: '@id' }, {
-                update: { method: 'PUT' }
+                update: { method: 'PUT' },
+                getAromas
             })
         });
 

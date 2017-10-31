@@ -57,22 +57,27 @@ md-toolbar md-input-container:not(.md-input-invalid).md-input-focused label {
     font: bold italic 110% italic;
     color: #000000!important;
 }
+
+
 /*стили для диалога добавления*/
 
-fieldset{
-    background: #FCFCFC;
-    /* padding: 16px; */
-     border: 0px solid #D5D5D5; 
+.fieldset_header {
+    position: relative;
+    left: 15px;
+    color: rgba(0, 0, 0, 0.38);
+}
+
+.fieldset_header #last_p {
+    position: absolute;
+    left: 184px;
+}
+
+fieldset {
+    border: none;
 }
 
 
-/* #choicesDisplay {
-    padding: 10px;
-    background: rgb(227, 250, 227);
-    border: 1px solid rgb(171, 239, 171);
-    color: rgb(9, 56, 9);
-} */
-/* .remove{
+/* .remove{ квадратная красная кнопка "Удалить" может пригодится потом
     background: #C76868;
     color: #FFF;
     font-weight: bold;
@@ -86,8 +91,9 @@ fieldset{
 } */
 
 input[type="text"],
-select{
-    padding:1px;
+select {
+    padding: 1px;
     margin: 0;
-    /* height: 50px !important; */
+    border: none;
+    border-bottom: 1px solid #c8caca;
 }
