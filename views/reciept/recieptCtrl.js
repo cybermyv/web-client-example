@@ -71,10 +71,10 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
             controller: function($scope, $state, $mdDialog, RecieptService) {
                 console.log('Добавить рецепт');
                 $scope.reciept = new RecieptService();
-                
-                $scope.choices = [{id:1, name:'aroma1'},{id:2, name:'aroma2'}];
 
-               
+                $scope.reciept.choices = [{ id: 1, val: 1 }, { id: 2, val: 2 }];
+
+
 
                 $mdDialog.show({
                         templateUrl: 'views/reciept/reciept.add.html',
@@ -83,31 +83,31 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                         locals: {
                             aTitle: 'Добавить новый рецепт',
                             reciept: $scope.reciept,
-                            choices :$scope.choices
+                            choices: $scope.reciept.choices
                                 //-- надо добавить вывод аромок -- Автокомплит
                         }, //locals
                         controller: ($scope, $mdDialog, aTitle, reciept, choices) => {
                                 $scope.title = aTitle;
                                 $scope.reciept = reciept;
-                                $scope.choices = choices;
+                                $scope.reciept.choices = choices;
 
-                                console.log (choices);
+                                console.log(choices);
                                 //-- передать сюда список аромок, и их нужно искать по русскому и англ. названиям. 
                                 //-- пока делаем все просто.
-                               
 
-                                $scope.addNewChoice = ()=>{
-                                    let newItem = $scope.choices.length + 1;
-                                    $scope.choices.push({id:newItem, name:'aroma'+newItem}); //-- прикольный способ вставлять прямо в массив
+
+                                $scope.addNewChoice = () => {
+                                    let newItem = $scope.reciept.choices.length + 1;
+                                    $scope.reciept.choices.push({ id: newItem, val: newItem }); //-- прикольный способ вставлять прямо в массив
 
                                 };
-                                
-                                $scope.removeChoice = ()=> {
-                                    var lastItem = $scope.choices.length-1;
-                                    $scope.choices.splice(lastItem);
-                                  };
 
-                                
+                                $scope.removeChoice = () => {
+                                    var lastItem = $scope.reciept.choices.length - 1;
+                                    $scope.reciept.choices.splice(lastItem);
+                                };
+
+
 
                                 $scope.cancel = function() {
                                     console.log('cancel');
@@ -122,7 +122,8 @@ recieptModule.config(($stateProvider, $urlRouterProvider) => {
                     })
                     .then(
                         function(data) {
-                            console.log(data);
+                            //  console.log(data);
+                            //-- тут нужно собирать объект и отправлять его в базу.
                             $scope.reciept.$save();
                             $state.go('^', null, { reload: true });
                         },
